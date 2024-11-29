@@ -1,1 +1,82 @@
-<p>TODO menu</p>
+<h1>Menu</h1>
+
+<form #menuForm="ngForm" (ngSubmit)="createMenu(menuForm)">
+  <input
+    type="text"
+    name="name"
+    ngModel
+    placeholder="Name"
+    required
+    #name="ngModel"
+  />
+  <div *ngIf="name.invalid && name.touched">Name is required</div>
+
+  <input
+    type="number"
+    name="price"
+    ngModel
+    placeholder="Price"
+    required
+    #price="ngModel"
+  />
+  <div *ngIf="price.invalid && price.touched">Price is required</div>
+
+  <input
+    type="text"
+    name="description"
+    ngModel
+    placeholder="Description"
+    required
+    #description="ngModel"
+  />
+  <div *ngIf="description.invalid && description.touched">Description is required</div>
+
+  <input
+    type="number"
+    name="restaurant_id"
+    ngModel
+    placeholder="Restaurant ID"
+    required
+    #restaurantId="ngModel"
+  />
+  <div *ngIf="restaurantId.invalid && restaurantId.touched">Restaurant ID is required</div>
+
+  <input
+    type="number"
+    name="category_id"
+    ngModel
+    placeholder="Category ID"
+    required
+    #categoryId="ngModel"
+  />
+  <div *ngIf="categoryId.invalid && categoryId.touched">Category ID is required</div>
+
+  <button type="submit" [disabled]="menuForm.invalid">
+    Create Menu
+  </button>
+</form>
+
+<section>
+  <table border="1" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Menu Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let menu of menus">
+        <td>{{ menu.name }}</td>
+        <td>{{ menu.price }}</td>
+        <td>{{ menu.description }}</td>
+        <td>
+          <button (click)="getMenuDetails(menu.menu_uuid)">View</button>
+          <button (click)="updateMenu(menu.menu_uuid, menu)">Update</button>
+          <button (click)="deleteMenu(menu.menu_uuid)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

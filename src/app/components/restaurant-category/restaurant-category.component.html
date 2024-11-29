@@ -1,1 +1,34 @@
-<p>TODO Restaurant Category</p>
+<div>
+    <h2>Create New Restaurant Category</h2>
+    <form (ngSubmit)="createCategory()">
+      <input [(ngModel)]="newRestaurantCategory.name" name="name" placeholder="Restaurant Name" required />
+      <input [(ngModel)]="newRestaurantCategory.address" name="address" placeholder="Address" required />
+      <input [(ngModel)]="newRestaurantCategory.phone" name="phone" placeholder="Phone" required />
+      <input [(ngModel)]="newRestaurantCategory.email" name="email" placeholder="Email" required />
+      <textarea [(ngModel)]="newRestaurantCategory.description" name="description" placeholder="Description" required></textarea>
+      <button type="submit">Create</button>
+    </form>
+  </div>
+  
+  <div>
+    <h2>Restaurant Categories List</h2>
+    <ul>
+      <li *ngFor="let category of restaurantCategories">
+        <span>{{ category.name }} - {{ category.status ? 'Active' : 'Inactive' }}</span>
+        <button (click)="viewCategory(category.restaurant_id)">View</button>
+        <button (click)="updateCategory(category.restaurant_id)">Update</button>
+        <button (click)="deleteCategory(category.restaurant_id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  
+  <div *ngIf="selectedRestaurantCategory.restaurant_id">
+    <h2>Restaurant Category Details</h2>
+    <p><strong>Name:</strong> {{ selectedRestaurantCategory.name }}</p>
+    <p><strong>Address:</strong> {{ selectedRestaurantCategory.address }}</p>
+    <p><strong>Phone:</strong> {{ selectedRestaurantCategory.phone }}</p>
+    <p><strong>Email:</strong> {{ selectedRestaurantCategory.email }}</p>
+    <p><strong>Description:</strong> {{ selectedRestaurantCategory.description }}</p>
+    <p><strong>Status:</strong> {{ selectedRestaurantCategory.status ? 'Active' : 'Inactive' }}</p>
+  </div>
+  
